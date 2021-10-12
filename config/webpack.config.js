@@ -334,6 +334,8 @@ module.exports = function (webpackEnv) {
           'scheduler/tracing': 'scheduler/tracing-profiling',
         }),
         ...(modules.webpackAliases || {}),
+        //NOTE add alias for maplibre to replace mapbox - https://visgl.github.io/react-map-gl/docs/get-started/get-started
+        "mapbox-gl": "maplibre-gl",
       },
       plugins: [
         // Adds support for installing with Plug'n'Play, leading to faster installs and adding
