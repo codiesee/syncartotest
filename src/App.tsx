@@ -34,14 +34,16 @@ import { H3HexagonLayer } from "@deck.gl/geo-layers";
 
 // source: Natural Earth http://www.naturalearthdata.com/ via geojson.xyz
 const AIR_PORTS =
-  "https://d2ad6b4ur7yvpq.cloudfront.net/naturalearth-3.3.0/ne_10m_airports.geojson";
+  "ne_10m_airports.geojson";
+//const AIR_PORTS =
+//  "https://d2ad6b4ur7yvpq.cloudfront.net/naturalearth-3.3.0/ne_10m_airports.geojson";
 const HEX_DATA =
   "https://raw.githubusercontent.com/chriszrc/foss4g-2021-react-mapbox/main/deck-layers-map/public/data/hex_radio_coverage.json";
 // "https://raw.githubusercontent.com/visgl/deck.gl-data/45e6a163f8d14e6ff50f4e01b3089643529c136f/website/sf.h3cells.json";
 
 function App() {
   const layers = [
-    new GeoJsonLayer({
+    /*new GeoJsonLayer({
       id: "Airports",
       data: AIR_PORTS,
       // Styles
@@ -60,7 +62,7 @@ function App() {
           `${info.object.properties.name} (${info.object.properties.abbrev})`
         ),
     }),
-    /*new ArcLayer<any, {}>({
+    new ArcLayer<any, {}>({
       id: "Arcs",
       data: AIR_PORTS,
       //NOTE good place to talk about generics in typescript
@@ -90,9 +92,9 @@ function App() {
     }),*/
   ];
 
-  const [activeLayerIds, setActiveLayerIds] = useState<string[]>([
+  /*const [activeLayerIds, setActiveLayerIds] = useState<string[]>([
     layers[0].id,
-  ]);
+  ]);*/
 
   return (
     <div className="App">
