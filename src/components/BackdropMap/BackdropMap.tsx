@@ -18,8 +18,11 @@ import DeckGL, { H3HexagonLayer, ArcLayer, GeoJsonLayer, ScatterplotLayer/*IconL
 //const AIR_PORTS = require('../../data.json'); // 112400
 //const AIR_PORTS = require('../../data_half.json'); // 50176
 //const AIR_PORTS = require('../../data_quarter.json'); // 25068
-const AIR_PORTS = require('../../data_small.json'); // 882
+//const AIR_PORTS = require('../../data_eighth.json'); // 25068
+//const AIR_PORTS = require('../../data_small.json'); // 882
+//const AIR_PORTS = require('../../data_smaller.json'); // 535
 //const AIR_PORTS = require('./ne_10m_airports.json');
+const AIR_PORTS = require('../../manhattan.json'); // 112400
 console.log(AIR_PORTS);
 const HEX_DATA =
   "https://raw.githubusercontent.com/chriszrc/foss4g-2021-react-mapbox/main/deck-layers-map/public/data/hex_radio_coverage.json";
@@ -30,7 +33,11 @@ export type Viewport = Omit<ViewportProps, "width" | "height"> &
     width: number | string;
     height: number | string;
   }>;
-
+const MALE_COLOR = [0, 128, 255];
+const FEMALE_COLOR = [255, 0, 128];
+let radius = 1,
+maleColor = MALE_COLOR,
+femaleColor = FEMALE_COLOR;
 const BackdropMap = () => {
   const [viewport, setViewport] = useState<Viewport>({
     width: "100vw",
@@ -41,14 +48,14 @@ const BackdropMap = () => {
   });
   //console.log(AIR_PORTS)
   const layers = [
-    new GeoJsonLayer({ //https://deck.gl/docs/api-reference/layers/geojson-layer
+    /*new GeoJsonLayer({ //https://deck.gl/docs/api-reference/layers/geojson-layer
       id: "Airports",
       data: AIR_PORTS,
       // Styles
       filled: true,
       pointRadiusMinPixels: 1,
       pointRadiusScale: 0.5,
-      getPointRadius: (f: any) => 160 - f.properties["plant-vvi_mean"],
+      getPointRadius: 2, //(f: any) => 160 - f.properties["plant-vvi_mean"],
       getFillColor: [0, 188, 212, 100],
       getLineColor: [0, 188, 0, 255],
       getLineWidth: 0.25,
@@ -62,23 +69,19 @@ const BackdropMap = () => {
         alert(
           `${info.object.properties.plant_id} (${info.object.properties["plant-vvi_mean"]}) ${info.object.geometry.coordinates[0]}, ${info.object.geometry.coordinates[1]}`
         )
-    }),
-    /*new ScatterplotLayer({
-      id: 'scatterplot-layer',
-      data: AIR_PORTS,
-      pickable: true,
-      opacity: 0.8,
-      stroked: true,
-      filled: true,
-      radiusScale: 6,
-      radiusMinPixels: 1,
-      radiusMaxPixels: 100,
-      lineWidthMinPixels: 1,
-      getPosition: (d:any) => d.object.geometry.coordinates,
-      getRadius: 5, //(d:any) => Math.sqrt(d.exits),
-      getFillColor: (d:any) => [255, 140, 0],
-      getLineColor: (d:any) => [0, 0, 0]
     }),*/
+    new ScatterplotLayer({
+      id: 'scatter-plot',
+      data: AIR_PORTS,
+      radiusScale: radius,
+      radiusMinPixels: 0.25,
+      getPosition: (d:any) => [d[0], d[1], 0],
+      getFillColor: [0, 188, 212, 100], // (d:any) => (d[2] === 1 ? maleColor : femaleColor),
+      getRadius: 0.5,
+      //updateTriggers: {
+      //  getFillColor: [maleColor, femaleColor]
+      //}
+    })
     /*new IconLayer({ // FAILED TO WORK
       id: 'icon-layer',
       data: AIR_PORTS,
