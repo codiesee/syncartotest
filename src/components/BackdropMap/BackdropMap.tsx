@@ -15,14 +15,14 @@ import DeckGL, { H3HexagonLayer, ArcLayer, GeoJsonLayer, ScatterplotLayer/*IconL
 // source: Natural Earth http://www.naturalearthdata.com/ via geojson.xyz
 //const AIR_PORTS =
 //  "https://d2ad6b4ur7yvpq.cloudfront.net/naturalearth-3.3.0/ne_10m_airports.geojson";
-//const AIR_PORTS = require('../../data.json'); // 112400
+const AIR_PORTS = require('../../data.json'); // 112400
 //const AIR_PORTS = require('../../data_half.json'); // 50176
 //const AIR_PORTS = require('../../data_quarter.json'); // 25068
 //const AIR_PORTS = require('../../data_eighth.json'); // 25068
 //const AIR_PORTS = require('../../data_small.json'); // 882
 //const AIR_PORTS = require('../../data_smaller.json'); // 535
 //const AIR_PORTS = require('./ne_10m_airports.json');
-const AIR_PORTS = require('../../manhattan.json'); // 112400
+//const AIR_PORTS = require('../../manhattan.json'); // 112400
 console.log(AIR_PORTS);
 const HEX_DATA =
   "https://raw.githubusercontent.com/chriszrc/foss4g-2021-react-mapbox/main/deck-layers-map/public/data/hex_radio_coverage.json";
@@ -48,7 +48,7 @@ const BackdropMap = () => {
   });
   //console.log(AIR_PORTS)
   const layers = [
-    /*new GeoJsonLayer({ //https://deck.gl/docs/api-reference/layers/geojson-layer
+    new GeoJsonLayer({ //https://deck.gl/docs/api-reference/layers/geojson-layer
       id: "Airports",
       data: AIR_PORTS,
       // Styles
@@ -69,8 +69,8 @@ const BackdropMap = () => {
         alert(
           `${info.object.properties.plant_id} (${info.object.properties["plant-vvi_mean"]}) ${info.object.geometry.coordinates[0]}, ${info.object.geometry.coordinates[1]}`
         )
-    }),*/
-    new ScatterplotLayer({
+    }),
+    /*new ScatterplotLayer({
       id: 'scatter-plot',
       data: AIR_PORTS,
       radiusScale: radius,
@@ -81,7 +81,7 @@ const BackdropMap = () => {
       //updateTriggers: {
       //  getFillColor: [maleColor, femaleColor]
       //}
-    })
+    })*/
     /*new IconLayer({ // FAILED TO WORK
       id: 'icon-layer',
       data: AIR_PORTS,
