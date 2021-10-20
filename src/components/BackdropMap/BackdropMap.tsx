@@ -60,6 +60,11 @@ const BackdropMap = () => {
       getLineColor: [0, 188, 0, 255],
       getLineWidth: 0.25,
       stroked:true,
+      extruded: true,
+      elevationScale: 10000,
+      //getHexagon: (d: any) => d.hex,
+      //getFillColor: (d: any) => [255, (1 - d.count / 50) * 255, 0],
+      getElevation: (d: any) => d.properties["plant-vvi_mean"],
       // Interactive props
       pickable: true,
       autoHighlight: true,
